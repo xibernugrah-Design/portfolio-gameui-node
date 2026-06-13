@@ -173,6 +173,7 @@ body {
 .text-gradient {
     background: linear-gradient(90deg, var(--cyan), #b624ff);
     -webkit-background-clip: text;
+    background-clip: text; /* <--- Tambahkan baris standar ini */
     -webkit-text-fill-color: transparent;
 }
 
