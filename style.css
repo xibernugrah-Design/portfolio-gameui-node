@@ -1,0 +1,424 @@
+/* ==========================================================================
+   1. RESET GLOBAL & BASE STYLE
+   ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: #020617; /* Hitam pekat kebiruan */
+    color: #ffffff;
+    overflow-x: hidden;
+}
+
+/* Batas antar section dengan pendaran garis biru halus */
+section {
+    position: relative;
+    padding: 100px 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid rgba(0, 240, 255, 0.15);
+}
+
+/* ==========================================================================
+   2. NAV TAB HEADER (Gaya Menu Game)
+   ========================================================================== */
+.section-nav-header {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 60px;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 6px 15px;
+    border-radius: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(5px);
+}
+
+.nav-tab {
+    text-decoration: none;
+    color: #94a3b8;
+    padding: 8px 22px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+.nav-tab.active, .nav-tab:hover {
+    color: #020617;
+    background-color: #ffffff;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+}
+
+/* ==========================================================================
+   3. SECTION 1: HERO GAME INTERFACE
+   ========================================================================== */
+#hero-game {
+    background: radial-gradient(circle at center, #0b192f 0%, #020c1b 100%);
+}
+
+.top-logo {
+    position: absolute;
+    top: 40px;
+    left: 50px;
+    font-size: 1.8rem;
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+}
+
+.hero-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* Kapsul Profil Horizontal Merah Marun */
+.profile-capsule {
+    display: flex;
+    align-items: center;
+    background-color: #5c0612; 
+    padding: 12px 40px 12px 12px;
+    border-radius: 100px;
+    gap: 25px;
+    box-shadow: 0 0 40px rgba(92, 6, 18, 0.6);
+    margin-bottom: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    width: max-content; /* Mengunci lebar kapsul sesuai teks agar tidak menciut */
+    max-width: 95vw;
+}
+
+.profile-img-container {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid #ffffff;
+    flex-shrink: 0; /* Mencegah lingkaran foto gepeng */
+}
+
+.hero-avatar {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.hero-avatar:hover {
+    transform: scale(1.15);
+}
+
+/* Teks Utama Portfolio */
+.hero-text-title h1 {
+    font-size: 3.5rem;
+    font-weight: 900;
+    letter-spacing: 1px;
+    color: #ffffff;
+    white-space: nowrap; /* Mengunci teks agar tidak pecah/turun baris */
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+.hero-text-title .year {
+    font-weight: 300;
+    color: #cbd5e1;
+}
+
+.subtitle {
+    font-size: 0.85rem;
+    color: #94a3b8;
+    letter-spacing: 4px;
+    margin-bottom: 50px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.square-icon {
+    color: #ffffff;
+    font-size: 0.65rem;
+    margin-right: 6px;
+    vertical-align: middle;
+}
+
+/* Menu Pilihan Game Vertikal */
+.game-menu-vertical {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.menu-item-vertical {
+    text-decoration: none;
+    color: #64748b;
+    font-weight: bold;
+    font-size: 0.95rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    transition: all 0.2s ease;
+    padding: 6px 30px;
+}
+
+.menu-item-vertical:hover {
+    color: #ffffff;
+    text-shadow: 0 0 15px #ffffff, 0 0 30px #ffffff;
+    transform: scale(1.15);
+}
+
+/* ==========================================================================
+   4. SECTION 2: ABOUT ME (Statistik Karakter)
+   ========================================================================== */
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 60px;
+    max-width: 1050px;
+    width: 100%;
+    align-items: center;
+}
+
+.hello-tag {
+    color: #475569;
+    font-size: 0.85rem;
+    letter-spacing: 3px;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.about-left h2 {
+    font-size: 2.8rem;
+    font-weight: 800;
+    margin-bottom: 25px;
+    letter-spacing: 1px;
+}
+
+.about-image-frame {
+    width: 100%;
+    height: 380px;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #0f172a;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(0, 240, 255, 0.15);
+}
+
+.about-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.about-img:hover {
+    transform: scale(1.03);
+}
+
+.about-right h3 {
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+    color: #ffffff;
+    margin-top: 30px;
+    margin-bottom: 12px;
+    border-left: 3px solid #ffffff;
+    padding-left: 12px;
+    font-weight: 800;
+}
+
+.about-desc {
+    color: #94a3b8;
+    font-size: 0.9rem;
+    line-height: 1.7;
+}
+
+.skills-icons {
+    display: flex;
+    gap: 12px;
+    margin-top: 15px;
+}
+
+.skill-circle {
+    width: 48px;
+    height: 48px;
+    background-color: #0f172a;
+    border: 1px solid #1e293b;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 0.8rem;
+    color: #38bdf8;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+}
+
+.education-experience-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.year-label {
+    color: #38bdf8;
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin: 6px 0;
+}
+
+.detail-text {
+    color: #64748b;
+    font-size: 0.85rem;
+    line-height: 1.5;
+}
+
+/* ==========================================================================
+   5. SECTION 3: RECAP PROJECT
+   ========================================================================== */
+.project-title {
+    font-size: 2.2rem;
+    letter-spacing: 3px;
+    margin-bottom: 50px;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+.project-gallery {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+    max-width: 950px;
+    width: 100%;
+}
+
+.project-card {
+    background-color: #0f172a;
+    border: 1px solid #1e293b;
+    border-radius: 10px;
+    height: 220px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.project-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(255, 255, 255, 0.6);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+}
+
+.project-img-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #475569;
+    font-weight: 600;
+    letter-spacing: 1px;
+    font-size: 0.9rem;
+    background: linear-gradient(145deg, #0f172a, #020617);
+}
+
+/* ==========================================================================
+   6. SECTION 4: CONTACT & THANK YOU
+   ========================================================================== */
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    max-width: 950px;
+    width: 100%;
+    align-items: center;
+}
+
+.contact-profile-circle {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 4px solid #1e293b;
+    margin: 25px 0;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+}
+
+.contact-avatar {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.contact-avatar:hover {
+    transform: scale(1.1);
+}
+
+.social-list p {
+    margin: 12px 0;
+    color: #94a3b8;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.thank-you-text {
+    font-size: 4.5rem;
+    font-weight: 900;
+    line-height: 1.05;
+    text-align: right;
+    letter-spacing: -1px;
+}
+
+.year-large {
+    color: #334155;
+    font-weight: 800;
+}
+
+footer {
+    text-align: center;
+    padding: 35px;
+    background-color: #020617;
+    font-size: 0.75rem;
+    color: #475569;
+    border-top: 1px solid rgba(255, 255, 255, 0.02);
+}
+
+/* ==========================================================================
+   7. RESPONSIVITAS SMARTPHONE
+   ========================================================================== */
+@media (max-width: 768px) {
+    section {
+        padding: 60px 15px;
+    }
+    .about-grid, .project-gallery, .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    .thank-you-text {
+        text-align: center;
+        font-size: 3rem;
+        margin-top: 20px;
+    }
+    .profile-capsule {
+        padding: 10px 25px 10px 10px;
+        gap: 15px;
+    }
+    .hero-text-title h1 {
+        font-size: 2.3rem;
+    }
+    .profile-img-container {
+        width: 80px;
+        height: 80px;
+    }
+    .about-image-frame {
+        height: 280px;
+    }
+}
