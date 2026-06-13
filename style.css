@@ -1,424 +1,306 @@
-/* ==========================================================================
-   1. RESET GLOBAL & BASE STYLE
-   ========================================================================== */
+/* --- Core Styling & Reset --- */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-html {
     scroll-behavior: smooth;
 }
 
+:root {
+    --bg-main: #030014;
+    --bg-card: rgba(11, 7, 38, 0.4);
+    --border-glass: rgba(255, 255, 255, 0.08);
+    --cyan: #00F0FF;
+    --purple: #8A2BE2;
+    --pink: #ff007f;
+    --text-p: #F3F4F6;
+    --text-s: #9CA3AF;
+}
+
 body {
-    background-color: #020617; /* Hitam pekat kebiruan */
-    color: #ffffff;
+    background-color: var(--bg-main);
+    color: var(--text-p);
+    font-family: 'Plus Jakarta Sans', sans-serif;
     overflow-x: hidden;
 }
 
-/* Batas antar section dengan pendaran garis biru halus */
-section {
-    position: relative;
-    padding: 100px 20px;
+/* --- Galactic Light Trails Background --- */
+.space-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    overflow: hidden;
+    background: radial-gradient(circle at 50% 50%, #0a052d 0%, var(--bg-main) 70%);
+}
+
+.light-trail {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.4;
+    animation: floatTrail 20s infinite linear;
+}
+
+.trail-1 {
+    width: 500px;
+    height: 500px;
+    background: var(--cyan);
+    top: -10%;
+    left: -10%;
+}
+
+.trail-2 {
+    width: 600px;
+    height: 600px;
+    background: var(--purple);
+    bottom: -20%;
+    right: -10%;
+    animation-direction: reverse;
+}
+
+@keyframes floatTrail {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    50% { transform: translate(100px, 80px) rotate(180deg); }
+    100% { transform: translate(0, 0) rotate(360deg); }
+}
+
+/* --- Navigation --- */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-glass);
+    z-index: 100;
+    background: rgba(3, 0, 20, 0.7);
+}
+
+.nav-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.brand-logo {
+    font-weight: 800;
+    font-size: 1.3rem;
+    color: #fff;
+    text-decoration: none;
+    letter-spacing: 1px;
+}
+
+.brand-logo span { color: var(--cyan); }
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+}
+
+.nav-links a {
+    color: var(--text-s);
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover { color: var(--cyan); }
+
+/* --- UI Buttons & Hierarchy --- */
+.btn-primary, .btn-nav {
+    background: linear-gradient(90deg, var(--cyan), var(--purple));
+    color: #030014;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    border: none;
+    transition: transform 0.2s, box-shadow 0.3s;
+    cursor: pointer;
+}
+
+.btn-primary:hover, .btn-nav:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+}
+
+.btn-secondary {
+    border: 1px solid var(--border-glass);
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 8px;
+    text-decoration: none;
+    backdrop-filter: blur(4px);
+    transition: background 0.3s;
+}
+
+.btn-secondary:hover { background: rgba(255, 255, 255, 0.05); }
+
+/* --- Hero Section --- */
+.hero-section {
     min-height: 100vh;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    border-bottom: 1px solid rgba(0, 240, 255, 0.15);
-}
-
-/* ==========================================================================
-   2. NAV TAB HEADER (Gaya Menu Game)
-   ========================================================================== */
-.section-nav-header {
-    display: flex;
-    gap: 15px;
-    margin-bottom: 60px;
-    background: rgba(255, 255, 255, 0.03);
-    padding: 6px 15px;
-    border-radius: 30px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(5px);
-}
-
-.nav-tab {
-    text-decoration: none;
-    color: #94a3b8;
-    padding: 8px 22px;
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 1px;
-    border-radius: 20px;
-    transition: all 0.3s ease;
-}
-
-.nav-tab.active, .nav-tab:hover {
-    color: #020617;
-    background-color: #ffffff;
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
-}
-
-/* ==========================================================================
-   3. SECTION 1: HERO GAME INTERFACE
-   ========================================================================== */
-#hero-game {
-    background: radial-gradient(circle at center, #0b192f 0%, #020c1b 100%);
-}
-
-.top-logo {
-    position: absolute;
-    top: 40px;
-    left: 50px;
-    font-size: 1.8rem;
-    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
-}
-
-.hero-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     text-align: center;
+    padding: 0 20px;
 }
 
-/* Kapsul Profil Horizontal Merah Marun */
-.profile-capsule {
-    display: flex;
-    align-items: center;
-    background-color: #5c0612; 
-    padding: 12px 40px 12px 12px;
-    border-radius: 100px;
-    gap: 25px;
-    box-shadow: 0 0 40px rgba(92, 6, 18, 0.6);
-    margin-bottom: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    width: max-content; /* Mengunci lebar kapsul sesuai teks agar tidak menciut */
-    max-width: 95vw;
-}
+.hero-content { max-width: 800px; }
 
-.profile-img-container {
-    width: 110px;
-    height: 110px;
-    border-radius: 50%;
-    overflow: hidden;
-    border: 3px solid #ffffff;
-    flex-shrink: 0; /* Mencegah lingkaran foto gepeng */
-}
-
-.hero-avatar {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.hero-avatar:hover {
-    transform: scale(1.15);
-}
-
-/* Teks Utama Portfolio */
-.hero-text-title h1 {
-    font-size: 3.5rem;
-    font-weight: 900;
-    letter-spacing: 1px;
-    color: #ffffff;
-    white-space: nowrap; /* Mengunci teks agar tidak pecah/turun baris */
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
-}
-
-.hero-text-title .year {
-    font-weight: 300;
-    color: #cbd5e1;
-}
-
-.subtitle {
+.micro-tag {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--cyan);
     font-size: 0.85rem;
-    color: #94a3b8;
-    letter-spacing: 4px;
-    margin-bottom: 50px;
-    font-weight: 600;
-    white-space: nowrap;
-}
-
-.square-icon {
-    color: #ffffff;
-    font-size: 0.65rem;
-    margin-right: 6px;
-    vertical-align: middle;
-}
-
-/* Menu Pilihan Game Vertikal */
-.game-menu-vertical {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-}
-
-.menu-item-vertical {
-    text-decoration: none;
-    color: #64748b;
-    font-weight: bold;
-    font-size: 0.95rem;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    transition: all 0.2s ease;
-    padding: 6px 30px;
-}
-
-.menu-item-vertical:hover {
-    color: #ffffff;
-    text-shadow: 0 0 15px #ffffff, 0 0 30px #ffffff;
-    transform: scale(1.15);
-}
-
-/* ==========================================================================
-   4. SECTION 2: ABOUT ME (Statistik Karakter)
-   ========================================================================== */
-.about-grid {
-    display: grid;
-    grid-template-columns: 1fr 1.3fr;
-    gap: 60px;
-    max-width: 1050px;
-    width: 100%;
-    align-items: center;
-}
-
-.hello-tag {
-    color: #475569;
-    font-size: 0.85rem;
-    letter-spacing: 3px;
-    font-weight: 700;
-    margin-bottom: 5px;
-}
-
-.about-left h2 {
-    font-size: 2.8rem;
-    font-weight: 800;
-    margin-bottom: 25px;
-    letter-spacing: 1px;
-}
-
-.about-image-frame {
-    width: 100%;
-    height: 380px;
-    border-radius: 12px;
-    overflow: hidden;
-    background: #0f172a;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-    border: 1px solid rgba(0, 240, 255, 0.15);
-}
-
-.about-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.4s ease;
-}
-
-.about-img:hover {
-    transform: scale(1.03);
-}
-
-.about-right h3 {
-    font-size: 1.1rem;
     letter-spacing: 2px;
-    color: #ffffff;
-    margin-top: 30px;
-    margin-bottom: 12px;
-    border-left: 3px solid #ffffff;
-    padding-left: 12px;
+    margin-bottom: 20px;
+}
+
+.hero-section h1 {
+    font-size: 3.5rem;
     font-weight: 800;
-}
-
-.about-desc {
-    color: #94a3b8;
-    font-size: 0.9rem;
-    line-height: 1.7;
-}
-
-.skills-icons {
-    display: flex;
-    gap: 12px;
-    margin-top: 15px;
-}
-
-.skill-circle {
-    width: 48px;
-    height: 48px;
-    background-color: #0f172a;
-    border: 1px solid #1e293b;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    font-size: 0.8rem;
-    color: #38bdf8;
-    box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
-}
-
-.education-experience-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 30px;
-    margin-top: 20px;
-}
-
-.year-label {
-    color: #38bdf8;
-    font-size: 0.8rem;
-    font-weight: bold;
-    margin: 6px 0;
-}
-
-.detail-text {
-    color: #64748b;
-    font-size: 0.85rem;
-    line-height: 1.5;
-}
-
-/* ==========================================================================
-   5. SECTION 3: RECAP PROJECT
-   ========================================================================== */
-.project-title {
-    font-size: 2.2rem;
-    letter-spacing: 3px;
-    margin-bottom: 50px;
-    font-weight: 900;
-    text-transform: uppercase;
-}
-
-.project-gallery {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 25px;
-    max-width: 950px;
-    width: 100%;
-}
-
-.project-card {
-    background-color: #0f172a;
-    border: 1px solid #1e293b;
-    border-radius: 10px;
-    height: 220px;
-    overflow: hidden;
-    position: relative;
-    cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.project-card:hover {
-    transform: translateY(-6px);
-    border-color: rgba(255, 255, 255, 0.6);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
-}
-
-.project-img-placeholder {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #475569;
-    font-weight: 600;
-    letter-spacing: 1px;
-    font-size: 0.9rem;
-    background: linear-gradient(145deg, #0f172a, #020617);
-}
-
-/* ==========================================================================
-   6. SECTION 4: CONTACT & THANK YOU
-   ========================================================================== */
-.contact-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    max-width: 950px;
-    width: 100%;
-    align-items: center;
-}
-
-.contact-profile-circle {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    overflow: hidden;
-    border: 4px solid #1e293b;
-    margin: 25px 0;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-}
-
-.contact-avatar {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.4s ease;
-}
-
-.contact-avatar:hover {
-    transform: scale(1.1);
-}
-
-.social-list p {
-    margin: 12px 0;
-    color: #94a3b8;
-    font-size: 0.95rem;
-    font-weight: 500;
-}
-
-.thank-you-text {
-    font-size: 4.5rem;
-    font-weight: 900;
-    line-height: 1.05;
-    text-align: right;
+    line-height: 1.2;
+    margin-bottom: 24px;
     letter-spacing: -1px;
 }
 
-.year-large {
-    color: #334155;
-    font-weight: 800;
+.text-gradient {
+    background: linear-gradient(90deg, var(--cyan), #b624ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
-footer {
-    text-align: center;
-    padding: 35px;
-    background-color: #020617;
-    font-size: 0.75rem;
-    color: #475569;
-    border-top: 1px solid rgba(255, 255, 255, 0.02);
+.hero-section p {
+    color: var(--text-s);
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+    line-height: 1.6;
 }
 
-/* ==========================================================================
-   7. RESPONSIVITAS SMARTPHONE
-   ========================================================================== */
+.hero-cta {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+/* --- Glassmorphism Bento Layout --- */
+.section-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 120px 20px 0 20px;
+}
+
+.section-header {
+    margin-bottom: 50px;
+}
+
+.mono-prefix {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--purple);
+}
+
+.section-header h2 {
+    font-size: 2rem;
+    margin-top: 5px;
+}
+
+.bento-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.glass-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-glass);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-radius: 16px;
+    padding: 40px;
+    transition: border 0.3s, transform 0.3s;
+}
+
+.glass-card:hover {
+    border-color: rgba(0, 240, 255, 0.3);
+    transform: translateY(-4px);
+}
+
+.skill-icon {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.text-cyan { color: var(--cyan); }
+.text-purple { color: var(--purple); }
+.text-pink { color: var(--pink); }
+
+.glass-card h3 { margin-bottom: 12px; font-size: 1.3rem; }
+.glass-card p { color: var(--text-s); line-height: 1.6; font-size: 0.95rem; }
+
+/* --- Projects Showcase --- */
+.project-card {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+}
+
+.project-visual {
+    width: 40%;
+    height: 200px;
+    background: linear-gradient(135deg, #120c3e, #030014);
+    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
+}
+
+.glow-sphere {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    background: radial-gradient(circle, var(--cyan) 0%, transparent 70%);
+    top: 20%;
+    left: 20%;
+    filter: blur(20px);
+}
+
+.project-info { width: 60%; }
+.project-tag { font-family: 'JetBrains Mono', monospace; color: var(--pink); font-size: 0.8rem; }
+.project-links a { color: var(--cyan); text-decoration: none; font-size: 0.9rem; margin-top: 20px; display: inline-block; }
+
+/* --- System Logs Timeline --- */
+.timeline {
+    position: relative;
+    border-left: 2px solid var(--border-glass);
+    padding-left: 30px;
+    margin-left: 10px;
+}
+
+.timeline-item { position: relative; margin-bottom: 40px; }
+.timeline-dot { position: absolute; left: -41px; top: 5px; width: 20px; height: 20px; background: var(--bg-main); border: 2px solid var(--cyan); border-radius: 50%; box-shadow: 0 0 10px var(--cyan); }
+.timeline-date { font-family: 'JetBrains Mono', monospace; color: var(--text-s); font-size: 0.85rem; margin-bottom: 5px; }
+.institution { color: var(--cyan); font-weight: 600; margin-bottom: 8px; font-size: 0.9rem;}
+
+/* --- Contact & Footer --- */
+.contact-section { display: flex; justify-content: center; text-align: center; margin-bottom: 100px; }
+.contact-box { max-width: 600px; width: 100%; }
+.contact-form { margin-top: 30px; display: flex; gap: 15px; }
+.contact-form input { flex: 1; background: rgba(0,0,0,0.3); border: 1px solid var(--border-glass); padding: 15px; border-radius: 8px; color: #fff; font-family: inherit; }
+.contact-form input:focus { outline: none; border-color: var(--cyan); }
+
+.footer { text-align: center; padding: 40px 20px; border-top: 1px solid var(--border-glass); color: var(--text-s); font-size: 0.85rem; font-family: 'JetBrains Mono', monospace; }
+
 @media (max-width: 768px) {
-    section {
-        padding: 60px 15px;
-    }
-    .about-grid, .project-gallery, .contact-grid {
-        grid-template-columns: 1fr;
-        gap: 40px;
-    }
-    .thank-you-text {
-        text-align: center;
-        font-size: 3rem;
-        margin-top: 20px;
-    }
-    .profile-capsule {
-        padding: 10px 25px 10px 10px;
-        gap: 15px;
-    }
-    .hero-text-title h1 {
-        font-size: 2.3rem;
-    }
-    .profile-img-container {
-        width: 80px;
-        height: 80px;
-    }
-    .about-image-frame {
-        height: 280px;
-    }
+    .hero-section h1 { font-size: 2.3rem; }
+    .nav-links, .btn-nav { display: none; }
+    .project-card { flex-direction: column; }
+    .project-visual, .project-info { width: 100%; }
+    .contact-form { flex-direction: column; }
 }

@@ -1,20 +1,22 @@
 const express = require('express');
 const path = require('path');
 const app = express();
-const PORT = 3000;
 
-// Mengatur folder publik agar file CSS dan gambar bisa diakses browser
+// Konfigurasi Port Server
+const PORT = process.env.PORT || 3000;
+
+// Middleware untuk membaca file statis (HTML, CSS, Aset Gambar) dari folder root
 app.use(express.static(path.join(__dirname)));
 
-// Route Utama: Ketika http://localhost:3000 dibuka, kirim file index.html
+// Route utama untuk menyajikan UI Portofolio Game
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-// Jalankan server lokal
+// Menyalakan server Node.js
 app.listen(PORT, () => {
-    console.log(`===================================================`);
-    console.log(`🎮 Server Game UI Portofolio NugZiffer Aktif!`);
-    console.log(`🚀 Akses localhost kamu di: http://localhost:${PORT}`);
-    console.log(`===================================================`);
+    console.log(`==================================================`);
+    console.log(` MATRIX CORE UPLINK SUCCESSFUL`);
+    console.log(` Server portofolio berjalan di: http://localhost:${PORT}`);
+    console.log(`==================================================`);
 });
